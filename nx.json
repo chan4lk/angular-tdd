@@ -28,6 +28,9 @@
     "pagination-app-e2e": {
       "tags": [],
       "implicitDependencies": ["pagination-app"]
+    },
+    "components": {
+      "tags": ["components"]
     }
   }
 }
