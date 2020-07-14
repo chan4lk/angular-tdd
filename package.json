@@ -8,7 +8,7 @@
     "nx": "nx",
     "start": "ng serve",
     "build": "ng build",
-    "test": "ng test",
+    "test": "nx affected:test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
     "affected:apps": "nx affected:apps",
@@ -25,7 +25,8 @@
     "update": "ng update @nrwl/workspace",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
-    "help": "nx help"
+    "help": "nx help",
+    "jest": "jest"
   },
   "private": true,
   "dependencies": {
@@ -43,27 +44,29 @@
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "0.901.0",
     "@angular-devkit/build-ng-packagr": "~0.901.11",
     "@angular/cli": "9.1.0",
-    "@nrwl/workspace": "9.5.1",
-    "@types/node": "~8.9.4",
-    "dotenv": "6.2.0",
-    "ng-packagr": "^9.0.0",
-    "ts-node": "~7.0.0",
-    "tslint": "~6.0.0",
-    "eslint": "6.8.0",
-    "typescript": "~3.8.3",
-    "prettier": "2.0.4",
     "@angular/compiler-cli": "^9.1.0",
     "@angular/language-service": "^9.1.0",
-    "@angular-devkit/build-angular": "0.901.0",
-    "codelyzer": "~5.0.1",
-    "jest-preset-angular": "8.1.2",
+    "@nrwl/cypress": "9.5.1",
     "@nrwl/jest": "9.5.1",
-    "jest": "25.2.3",
+    "@nrwl/workspace": "9.5.1",
     "@types/jest": "25.1.4",
-    "ts-jest": "25.2.1",
+    "@types/node": "~8.9.4",
+    "codelyzer": "~5.0.1",
     "cypress": "^4.1.0",
-    "@nrwl/cypress": "9.5.1"
+    "dotenv": "6.2.0",
+    "eslint": "6.8.0",
+    "jest": "25.2.3",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
+    "jest-preset-angular": "8.1.2",
+    "karma-coverage-istanbul-reporter": "^3.0.3",
+    "ng-packagr": "^9.0.0",
+    "prettier": "2.0.4",
+    "ts-jest": "25.2.1",
+    "ts-node": "~7.0.0",
+    "tslint": "~6.0.0",
+    "typescript": "~3.8.3"
   }
 }
