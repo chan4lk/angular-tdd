@@ -1,11 +1,14 @@
-<div class="pagination">
-  <span class="pagination__previous--button btn"><</span>
+<div *ngIf="pages.length" class="pagination">
+  <span class="pagination__previous--button btn" (click)="previous()"><</span>
   <ul class="pagination__items">
-    <li class="pagination__item btn">1</li>
-    <li class="pagination__item btn">2</li>
-    <li class="pagination__item btn active">3</li>
-    <li class="pagination__item btn">4</li>
-    <li class="pagination__item btn">5</li>
+    <li
+      *ngFor="let page of pages"
+      [ngClass]="{ active: page === _config.currentPage }"
+      class="pagination__item btn"
+      (click)="selectPage(page)"
+    >
+      {{ page }}
+    </li>
   </ul>
-  <span class="pagination__next--button btn">></span>
+  <span class="pagination__next--button btn" (click)="next()">></span>
 </div>
