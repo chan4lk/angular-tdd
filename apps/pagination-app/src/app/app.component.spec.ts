@@ -17,7 +17,7 @@ describe('AppComponent', () => {
   it(`should have as title 'pagination-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('pagination-app');
+    expect(app.title).toEqual('pagination-app2');
   });
 
   it('should render title', () => {
@@ -25,7 +25,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to pagination-app!'
+      'Welcome to pagination-app2!'
     );
   });
 });

@@ -25,7 +25,9 @@
               "apps/pagination-app/src/favicon.ico",
               "apps/pagination-app/src/assets"
             ],
-            "styles": ["apps/pagination-app/src/styles.scss"],
+            "styles": [
+              "apps/pagination-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -83,7 +85,10 @@
               "apps/pagination-app/tsconfig.app.json",
               "apps/pagination-app/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!apps/pagination-app/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/pagination-app/**/*"
+            ]
           }
         },
         "test": {
@@ -118,8 +123,13 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/pagination-app-e2e/tsconfig.e2e.json"],
-            "exclude": ["**/node_modules/**", "!apps/pagination-app-e2e/**/*"]
+            "tsConfig": [
+              "apps/pagination-app-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/pagination-app-e2e/**/*"
+            ]
           }
         }
       }
@@ -149,7 +159,10 @@
               "libs/components/tsconfig.lib.json",
               "libs/components/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/components/**/*"]
+            "exclude": [
+              "**/node_modules/**",
+              "!libs/components/**/*"
+            ]
           }
         },
         "test": {
@@ -160,11 +173,73 @@
             "passWithNoTests": true,
             "setupFile": "libs/components/src/test-setup.ts"
           }
+        },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "port": 4400,
+            "config": {
+              "configFolder": "libs/components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
+        },
+        "build-storybook": {
+          "builder": "@nrwl/storybook:build",
+          "options": {
+            "uiFramework": "@storybook/angular",
+            "outputPath": "dist/storybook/components",
+            "config": {
+              "configFolder": "libs/components/.storybook"
+            }
+          },
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          }
         }
       },
       "schematics": {
         "@nrwl/angular:component": {
           "style": "scss"
+        }
+      }
+    },
+    "components-e2e": {
+      "root": "apps/components-e2e",
+      "sourceRoot": "apps/components-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/components-e2e/cypress.json",
+            "tsConfig": "apps/components-e2e/tsconfig.e2e.json",
+            "devServerTarget": "components:storybook"
+          },
+          "configurations": {
+            "ci": {
+              "devServerTarget": "components:storybook:ci"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/components-e2e/tsconfig.e2e.json"
+            ],
+            "exclude": [
+              "**/node_modules/**",
+              "!apps/components-e2e/**/*"
+            ]
+          }
         }
       }
     }

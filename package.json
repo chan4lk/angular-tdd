@@ -26,7 +26,8 @@
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help",
-    "jest": "jest"
+    "jest": "jest",
+    "storybook": "nx run components:storybook"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +52,7 @@
     "@angular/language-service": "^9.1.0",
     "@nrwl/cypress": "9.5.1",
     "@nrwl/jest": "9.5.1",
+    "@nrwl/storybook": "^9.5.1",
     "@nrwl/workspace": "9.5.1",
     "@types/jest": "25.1.4",
     "@types/node": "~8.9.4",
@@ -67,6 +69,8 @@
     "ts-jest": "25.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~6.0.0",
-    "typescript": "~3.8.3"
+    "typescript": "~3.8.3",
+    "@storybook/addon-knobs": "5.3.9",
+    "@storybook/angular": "5.3.9"
   }
 }
