@@ -33,3 +33,18 @@ export const page_3 = () => ({
     },
   },
 });
+
+export const longPagination = () => ({
+  moduleMetadata: {
+    imports: [],
+  },
+  component: PaginationComponent,
+  props: {
+    config: {
+      currentPage: 2,
+      total: 53,
+      perPageCount: 5,
+      pageCount: 5,
+    },
+  },
+});

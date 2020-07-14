@@ -49,9 +49,19 @@ export class PaginationComponent implements OnInit {
     this.pages = pages;
   }
 
-  previous() {}
+  previous() {
+    if (!(this._config.currentPage - 1 < 1)) {
+      this._config.currentPage -= 1;
+    }
+  }
 
-  next() {}
+  next() {
+    if (!(this._config.currentPage + 1 > this.pages.length)) {
+      this._config.currentPage += 1;
+    }
+  }
 
-  selectPage(page: number) {}
+  selectPage(page: number) {
+    this._config.currentPage = page;
+  }
 }

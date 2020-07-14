@@ -1,5 +1,10 @@
 <div *ngIf="pages.length" class="pagination">
-  <span class="pagination__previous--button btn" (click)="previous()"><</span>
+  <span
+    class="pagination__previous--button btn"
+    [ngClass]="{ disabled: _config.currentPage - 1 < 1 }"
+    (click)="previous()"
+    ><</span
+  >
   <ul class="pagination__items">
     <li
       *ngFor="let page of pages"
@@ -10,5 +15,10 @@
       {{ page }}
     </li>
   </ul>
-  <span class="pagination__next--button btn" (click)="next()">></span>
+  <span
+    class="pagination__next--button btn"
+    [ngClass]="{ disabled: _config.currentPage + 1 > pages.length }"
+    (click)="next()"
+    >></span
+  >
 </div>

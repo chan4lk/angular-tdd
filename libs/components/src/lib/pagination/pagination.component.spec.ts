@@ -94,4 +94,133 @@ describe('PaginationComponent', () => {
     const numbers = debugElement.querySelectorAll('.pagination__item');
     expect(numbers.item(1).classList).toContain('active');
   });
+
+  it('should select 3rd page', () => {
+    component.config = {
+      currentPage: 2,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    const numbers = debugElement.querySelectorAll('.pagination__item');
+    (numbers.item(2) as any).click();
+    fixture.detectChanges();
+    expect(numbers.item(2).classList).toContain('active');
+  });
+
+  it('should select previous page', () => {
+    component.config = {
+      currentPage: 2,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    const btn = debugElement.querySelector('.pagination__previous--button');
+    (btn as any).click();
+    fixture.detectChanges();
+
+    const numbers = debugElement.querySelectorAll('.pagination__item');
+    expect(numbers.item(0).classList).toContain('active');
+  });
+
+  it('should select next page', () => {
+    component.config = {
+      currentPage: 2,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    const btn = debugElement.querySelector('.pagination__next--button');
+    (btn as any).click();
+    fixture.detectChanges();
+
+    const numbers = debugElement.querySelectorAll('.pagination__item');
+    expect(numbers.item(2).classList).toContain('active');
+  });
+
+  it('should disable next button', () => {
+    component.config = {
+      currentPage: 2,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    let btn = debugElement.querySelector('.pagination__next--button');
+    (btn as any).click();
+    fixture.detectChanges();
+    btn = debugElement.querySelector('.pagination__next--button');
+
+    expect(btn.classList).toContain('disabled');
+  });
+
+  it('should disable previous button', () => {
+    component.config = {
+      currentPage: 2,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    let btn = debugElement.querySelector('.pagination__previous--button');
+    (btn as any).click();
+    fixture.detectChanges();
+    btn = debugElement.querySelector('.pagination__previous--button');
+
+    expect(btn.classList).toContain('disabled');
+  });
+
+  it('should not go to previous page', () => {
+    component.config = {
+      currentPage: 1,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    const btn = debugElement.querySelector('.pagination__previous--button');
+    (btn as any).click();
+    fixture.detectChanges();
+
+    expect(component._config.currentPage).toBe(1);
+  });
+
+  it('should not go to next page', () => {
+    component.config = {
+      currentPage: 3,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 11,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    const btn = debugElement.querySelector('.pagination__next--button');
+    (btn as any).click();
+    fixture.detectChanges();
+
+    expect(component._config.currentPage).toBe(3);
+  });
 });
