@@ -27,6 +27,7 @@ export class PaginationComponent implements OnInit {
   };
 
   pages = [];
+  visible = [];
 
   constructor() {}
 
@@ -37,6 +38,7 @@ export class PaginationComponent implements OnInit {
     const remainder = this._config.total % this._config.perPageCount;
     if (pageCount === 0 && remainder > 0) {
       this.pages = [1];
+      this.visible = [1];
       return;
     } else if (remainder > 0) {
       pageCount += 1;
@@ -46,22 +48,51 @@ export class PaginationComponent implements OnInit {
       pages.push(index);
     }
 
+    const visible = this.getVisible(pages, this._config);
+
     this.pages = pages;
+    this.visible = visible;
+  }
+
+  private getVisible(pages: any[], _config: Pagination) {
+    if (_config.pageCount >= pages.length) {
+      return pages;
+    }
+
+    let start = 0;
+    let end = pages.length;
+
+    const range = Math.floor(_config.pageCount / 2);
+    start =
+      _config.currentPage + range < end
+        ? _config.currentPage - range - 1 > 0
+          ? _config.currentPage - range - 1
+          : 0
+        : end - _config.pageCount;
+    end =
+      _config.currentPage - range - 1 > 0
+        ? _config.currentPage + range
+        : _config.pageCount;
+
+    return pages.slice(start, end);
   }
 
   previous() {
     if (!(this._config.currentPage - 1 < 1)) {
       this._config.currentPage -= 1;
+      this.updatePages();
     }
   }
 
   next() {
     if (!(this._config.currentPage + 1 > this.pages.length)) {
       this._config.currentPage += 1;
+      this.updatePages();
     }
   }
 
   selectPage(page: number) {
     this._config.currentPage = page;
+    this.updatePages();
   }
 }

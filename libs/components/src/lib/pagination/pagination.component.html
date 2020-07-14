@@ -7,7 +7,7 @@
   >
   <ul class="pagination__items">
     <li
-      *ngFor="let page of pages"
+      *ngFor="let page of visible"
       [ngClass]="{ active: page === _config.currentPage }"
       class="pagination__item btn"
       (click)="selectPage(page)"

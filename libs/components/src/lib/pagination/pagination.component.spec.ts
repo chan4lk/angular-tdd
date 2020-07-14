@@ -223,4 +223,78 @@ describe('PaginationComponent', () => {
 
     expect(component._config.currentPage).toBe(3);
   });
+
+  it('should have 5 pages', () => {
+    component.config = {
+      currentPage: 9,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 55,
+    };
+
+    fixture.detectChanges();
+
+    expect(component.visible).toEqual([7, 8, 9, 10, 11]);
+  });
+
+  it('should have 3 pages from middle', () => {
+    component.config = {
+      currentPage: 8,
+      pageCount: 3,
+      perPageCount: 5,
+      total: 55,
+    };
+
+    fixture.detectChanges();
+
+    expect(component.visible).toEqual([7, 8, 9]);
+  });
+
+  it('should have 5 pages from end', () => {
+    component.config = {
+      currentPage: 10,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 55,
+    };
+
+    fixture.detectChanges();
+
+    expect(component.visible).toEqual([7, 8, 9, 10, 11]);
+  });
+
+  it('should have 5 pages from start', () => {
+    component.config = {
+      currentPage: 2,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 55,
+    };
+
+    fixture.detectChanges();
+
+    expect(component.visible).toEqual([1, 2, 3, 4, 5]);
+  });
+
+  it('should not disable previous button', () => {
+    component.config = {
+      currentPage: 9,
+      pageCount: 5,
+      perPageCount: 5,
+      total: 55,
+    };
+
+    fixture.detectChanges();
+
+    const debugElement = fixture.debugElement.nativeElement as HTMLElement;
+    let btn = debugElement.querySelector('.pagination__previous--button');
+    (btn as any).click();
+    fixture.detectChanges();
+
+    (btn as any).click();
+    fixture.detectChanges();
+    btn = debugElement.querySelector('.pagination__previous--button');
+
+    expect(btn.classList).not.toContain('disabled');
+  });
 });

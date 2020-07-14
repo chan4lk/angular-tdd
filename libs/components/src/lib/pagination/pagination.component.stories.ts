@@ -41,10 +41,10 @@ export const longPagination = () => ({
   component: PaginationComponent,
   props: {
     config: {
-      currentPage: 2,
-      total: 53,
-      perPageCount: 5,
+      currentPage: 9,
       pageCount: 5,
+      perPageCount: 5,
+      total: 55,
     },
   },
 });
